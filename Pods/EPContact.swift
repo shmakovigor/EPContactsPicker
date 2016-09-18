@@ -11,9 +11,9 @@ import Contacts
 
 open class EPContact: NSObject {
     
-    open var firstName: NSString!
-    open var lastName: NSString!
-    open var company: NSString!
+    open var firstName: String!
+    open var lastName: String!
+    open var company: String!
     open var thumbnailProfileImage: UIImage?
     open var profileImage: UIImage?
     open var birthday: Date?
@@ -31,9 +31,9 @@ open class EPContact: NSObject {
         super.init()
         
         //VERY IMPORTANT: Make sure you have all the keys accessed below in the fetch request
-        firstName = contact.givenName as NSString!
-        lastName = contact.familyName as NSString!
-        company = contact.organizationName as NSString!
+        firstName = contact.givenName
+        lastName = contact.familyName
+        company = contact.organizationName
         contactId = contact.identifier
         
         if let thumbnailImageData = contact.thumbnailImageData {
@@ -71,11 +71,11 @@ open class EPContact: NSObject {
     
     open func contactInitials() -> String {
         var initials = String()
-        if firstName.length > 0 {
-            initials.append(firstName.substring(to: 1))
+        if firstName.characters.count > 0 {
+            initials.append(firstName.substring(to: firstName.index(after: firstName.startIndex)))
         }
-        if lastName.length > 0 {
-            initials.append(lastName.substring(to: 1))
+        if lastName.characters.count > 0 {
+            initials.append(lastName.substring(to: lastName.index(after: lastName.startIndex)))
         }
         return initials
     }
