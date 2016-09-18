@@ -56,17 +56,17 @@ open class EPContact: NSObject {
         
         for phoneNumber in contact.phoneNumbers {
             let phone = phoneNumber.value 
-            phoneNumbers.append((phone.stringValue,phoneNumber.label!))
+            phoneNumbers.append((phone.stringValue,phoneNumber.label ?? ""))
         }
 
         for emailAddress in contact.emailAddresses {
             let email = emailAddress.value as String
-            emails.append((email,emailAddress.label!))
+            emails.append((email,emailAddress.label ?? ""))
         }
     }
     
     open func displayName() -> String {
-        return "\(firstName) \(lastName)"
+        return "\(firstName ?? "") \(lastName ?? "")"
     }
     
     open func contactInitials() -> String {
